@@ -1,20 +1,36 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import {useDateTimeStore} from "../store/dateTime"
+import { onBeforeMount, ref } from "vue";
+import { useDateTimeStore } from "../store/dateTime"
+/**
+ * Properties
+ */
 const dateStore = useDateTimeStore()
-
-
-onMounted(() => {
+const date = ref("")
+/**
+ * Methods
+ */
+const getDate = () => {
   dateStore.getDate().then((result: string) => {
-    console.log(result);
+    if (result) {
+      date.value = result;
+    } else {
+      alert('Failed to get the current time');
+    }
   }).catch((err: string) => {
     console.error(err);
   });
+}
+
+/**
+ *  Hooks
+ */
+onBeforeMount(() => {
+  getDate()
 });
 </script>
 
 <template>
   <div class="text-3xl font-bold underline">
-    {{ dateStore.dateCal }}
+    {{ date }}
   </div>
 </template>
