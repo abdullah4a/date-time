@@ -2,11 +2,12 @@
 import { onMounted } from "vue";
 import {useDateTimeStore} from "../store/dateTime"
 const dateStore = useDateTimeStore()
-// Assuming you want to dispatch the action when the component is mounted
+
+
 onMounted(() => {
-  dateStore.getDate().then((result) => {
+  dateStore.getDate().then((result: string) => {
     console.log(result);
-  }).catch((err) => {
+  }).catch((err: string) => {
     console.error(err);
   });
 });
