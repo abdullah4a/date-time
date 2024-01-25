@@ -1,16 +1,21 @@
 import { defineStore } from 'pinia'
-import { services } from '../services';
+import { DateTimeInput } from '../types/DateType';
 interface DateTimeState {
-  dateTime: string
+  dateTime: DateTimeInput
 }
 export const useDateTimeStore = defineStore('dateTime', {
-  state: (): DateTimeState => ({ dateTime: "" }),
+  state: (): DateTimeState => ({
+    dateTime: {
+      startDate: '',
+      endDate: ''
+    }
+  }),
   getters: {
     dateCal: (state: DateTimeState) => state.dateTime
   },
   actions: {
-    getDate(_params?:Record<string, any>) {
-      return new Promise<string>((resolve, _reject) => {
+    getDate(_params?: Record<string, any>) {
+      return new Promise<DateTimeInput>((resolve, _reject) => {
         if (this.dateTime) {
           resolve(this.dateTime)
         } else {
@@ -20,10 +25,13 @@ export const useDateTimeStore = defineStore('dateTime', {
           // }).catch(err=>{
           //   _reject(err)
           // })
-          setTimeout(()=>{
-            this.dateTime = "2021-09-30"
-            resolve("2021-09-30")
-            },500)
+          setTimeout(() => {
+            this.dateTime = {
+              startDate: "2018-05-30 ",
+              endDate: "2019-06-14"
+            }
+            resolve(this.dateTime)
+          }, 500)
         }
       });
     }
