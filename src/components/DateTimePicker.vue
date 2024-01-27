@@ -31,7 +31,6 @@ import moment from "moment"
 
 export default {
     emits: ['newDate', 'update:time', 'clear:payload'],
-    inject: ['width'],
     props: {
         value: {
             type: Object,
@@ -63,6 +62,7 @@ export default {
                 startDate: '',
                 endDate: ''
             },
+            width: window.innerWidth,
             validationError: false,
             time: new Date().toLocaleTimeString('en-US', { hour12: false }).substring(0, 5),
             timeError: false
