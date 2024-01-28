@@ -31,6 +31,10 @@ const formatter = ref({
   date: 'DD-MM-YYYY~HH:mm:ss',
   month: 'MM',
 })
+// const minStep=ref(15)
+const minTime = ref("")
+const maxTime = ref("")
+const hint=ref('')
 /**
  * @Methods
  */
@@ -113,11 +117,20 @@ const submit = async () => {
     showAlertMessage(msg, `Error!${code?' with '+code:''}`, 'error')
   }
 }
+const showHint=()=>{
+  hint.value = 'Please use cross icon to remove icon, if you stuck in input hell';
+  setTimeout(()=>{
+  hint.value = '';
+  }, 3000)
+}
 </script>
 
 <template>
   <div class="grow">
     <h2 class="text-3xl font-bold">{{ 'Select Date' }}</h2>
+    <p class="" v-if="hint!==''">
+    {{ hint }}
+  </p>
     <hr class="" />
     <div class="flex flex-row justify-start items-start my-4">
       <div class="flex flex-col justify-start" v-if="!timeOnly">
@@ -145,7 +158,10 @@ const submit = async () => {
           <div class="flex flex-row justify-start my-2">
             <button type="button"
               class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-              @click="timeOnly = !timeOnly">
+              @click="()=>{
+                timeOnly = !timeOnly
+                clearPayload()
+              }">
               {{ !timeOnly ? "Time Only" : "Date and Time" }}
             </button>
             <button type="button" v-if="timeOnly"
@@ -166,7 +182,7 @@ const submit = async () => {
     </div>
     <div class="flex flex-row justify-start items Start my-2">
       <DateTimePicker :value="date" :formatter="formatter" :timePicker="timeOnly" :rangePicker="true"
-        :timeFormat="timeFormat" @newDate="getNewDate" @update:time="getTime" @clear:payload="clearPayload" />
+        :timeFormat="timeFormat" @newDate="getNewDate" @update:time="getTime" @clear:payload="clearPayload" @user:inp="showHint" :minTime="minTime" :maxTime="maxTime"/>
     </div>
     <div v-if="readySubmit" class="mt-10">
       <div class="my-4">
