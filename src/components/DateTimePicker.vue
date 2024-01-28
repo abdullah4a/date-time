@@ -133,7 +133,7 @@ export default {
         },
         checkInputtedDate(date: string) {
             try {
-                const unmaskedValue = date.replace(/\//g, '-')
+                const unmaskedValue = date.replace(/[, /]/g, '-')
                 const [startDate, endDate] = unmaskedValue.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3').split(' to ');
                 const formattedStartDate = moment(startDate, this.formatter['date']).format(this.formatter['date'])
                 const formattedEndDate = moment(endDate, this.formatter['date']).format(this.formatter['date'])
