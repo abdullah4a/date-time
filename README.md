@@ -49,3 +49,5 @@ rename env.dev file to .env to use variable
 ```
 VITE_DATA_URL=http://localhost:8080
 ```
+
+> Please use '/' for manual date input

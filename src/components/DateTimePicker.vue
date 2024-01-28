@@ -123,17 +123,17 @@ export default {
             this.time = ''
             this.$emit('clear:payload')
         },
-        getDate(event) {
+        getDate(event: any) {
             clearTimeout(this.timeout)
             const { value } = event.target
             this.timeout = setTimeout(() => {
                 this.$emit('user:inp')
                 this.checkInputtedDate(value)
-            }, 300)
+            }, 300) as any
         },
         checkInputtedDate(date: string) {
             try {
-                const unmaskedValue = date.replace(/[, /]/g, '-')
+                const unmaskedValue = date.replace(/\//g, '-')
                 const [startDate, endDate] = unmaskedValue.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3').split(' to ');
                 const formattedStartDate = moment(startDate, this.formatter['date']).format(this.formatter['date'])
                 const formattedEndDate = moment(endDate, this.formatter['date']).format(this.formatter['date'])
@@ -148,12 +148,12 @@ export default {
                 this.validationText = error as string
             }
         },
-        isValidMinuteStep(parsedTime) {
+        isValidMinuteStep(parsedTime: any) {
             const minutes = parsedTime.minutes();
             if (typeof this.minuteStep === 'number')
                 return minutes % this.minuteStep === 0;
             else if (Array.isArray(this.minuteStep)) {
-                return this.minuteStep.some(step => minutes % step === 0);
+                return this.minuteStep.some((step: any) => minutes % step === 0);
             }
             else return false
         },
@@ -173,7 +173,8 @@ export default {
             deep: true,
             handler(newValue) {
                 if (this.$refs.datepicker) {
-                    this.$refs.datepicker['clearPicker']()
+                    const datePicker = this.$refs.datepicker as any 
+                    datePicker['clearPicker']()
                 }
                 if (newValue) {
                     this.dateVal = { startDate: "", endDate: "" }
