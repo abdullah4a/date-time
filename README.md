@@ -16,3 +16,36 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+
+
+### About App.
+> from  tailwind.config.js change colors like this for color customization
+  
+```
+theme: {
+    extend: {
+      colors: {
+        "vtd-primary": colors.sky, // sky => red, black or any color
+        "vtd-secondary": colors.gray, // gray => red, black or any color
+      },
+    },
+  },
+```
+
+### Project setup
+
+> Setup the App
+```bash
+npm install
+```
+> Run the App
+```bash
+npm run dev
+```
+### env
+rename env.dev file to .env to use variable
+> Variables
+
+```
+VITE_DATA_URL=http://localhost:8080
+```
