@@ -171,7 +171,7 @@ const showHint=()=>{
                 clearPayload()
                 changeTimeFormat()
               }">
-              {{ timeFormatChange ? "12 Hours" : "24 hours" }}
+              {{ timeFormat === "HH:mm:ss" ? "12 Hours" : "24 hours" }}
             </button>
           </div>
         </div>
